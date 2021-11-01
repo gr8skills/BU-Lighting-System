@@ -4,7 +4,7 @@
     <div class="container justify-content-center">
         <div class="navbar-wrapper text-center">
             <a href="#" class="navbar-brand">
-                {{ trans('panel.site_title') }}
+                <h2 style="font-style: normal; color: #FFFFFF;">{{ trans('panel.site_title') }}</h2>
             </a>
         </div>
     </div>

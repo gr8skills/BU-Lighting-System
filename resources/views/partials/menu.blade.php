@@ -2,7 +2,7 @@
 <div class="sidebar" data-color="orange" data-background-color="white">
     <!-- Brand Logo -->
     <div class="logo">
-        <a href="#" class="simple-text logo-normal">
+        <a href="#" class="simple-text logo-normal" style="color: #9c27b066; font-weight: bolder">
             {{ trans('panel.site_title') }}
         </a>
     </div>
@@ -31,7 +31,7 @@
                             <b class="caret"></b>
                         </p>
                     </a>
-                    <div class="collapse show" id="user_management">
+                    <div class="collapse hide" id="user_management">
                         <ul class="nav">
                             @can('permission_access')
                                 <li class="nav-item">

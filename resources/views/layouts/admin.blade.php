@@ -81,7 +81,7 @@
             </section>
             <!-- /.content -->
             <footer class="footer justify-content-center">
-                <strong> &copy;</strong> {{ trans('global.allRightsReserved') }}
+                <strong> &copy;</strong> <?php echo date('Y') ?> {{ trans('global.allRightsReserved') }}
             </footer>
         </div>
         <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
