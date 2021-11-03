@@ -16,6 +16,13 @@
     <link href="{{ asset('css/material-dashboard.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="{{ asset('images/favicons/favicon.ico') }}" type="image/x-icon" id="fav-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" id="fav-icon" href="{{ asset('images/favicons/apple-touch-icon') }}">
+    <link rel="android-chrome" type="image/x-icon" sizes="192x192" href="{{ asset('images/favicons/android-chrome-192x192.png') }}">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="512x512" href="{{ asset('images/favicons/android-chrome-512x512.png') }}">
+
     @yield('styles')
 </head>
 

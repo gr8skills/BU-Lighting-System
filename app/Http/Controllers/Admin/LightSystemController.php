@@ -12,7 +12,7 @@ class LightSystemController extends Controller
     public function index()
     {
         $allLights = LightSystem::all();
-        return view('admin.users.index', compact('allLights'));
+        return view('admin.lights.index', compact('allLights'));
     }
 
     /**

@@ -39,6 +39,10 @@ return [
         'title'          => 'User Management',
         'title_singular' => 'User Management',
     ],
+    'lightManagement' => [
+        'title'          => 'Light Management',
+        'title_singular' => 'Light Management',
+    ],
     'user'           => [
         'title'          => 'Users',
         'title_singular' => 'User',
