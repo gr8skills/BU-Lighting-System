@@ -3,8 +3,8 @@
 @can('light_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.users.create") }}">
-                {{ trans('global.add') }} {{ trans('cruds.user.title_singular') }}
+            <a class="btn btn-success" href="{{ route("admin.lights.create") }}">
+                {{ trans('global.add') }} {{ trans('cruds.light.title_singular') }}
             </a>
         </div>
     </div>
@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-header card-header-primary">
         <h4 class="card-title">
-            {{ trans('cruds.user.title_singular') }} {{ trans('global.list') }}
+            {{ trans('cruds.light.title_singular') }} {{ trans('global.list') }}
         </h4>
     </div>
 
@@ -25,19 +25,22 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.id') }}
+                            {{ trans('cruds.light.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.name') }}
+                            {{ trans('cruds.light.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.email') }}
+                            {{ trans('cruds.light.fields.location') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
+                            {{ trans('cruds.light.fields.health') }}
                         </th>
                         <th>
-                            {{ trans('cruds.user.fields.roles') }}
+                            {{ trans('cruds.light.fields.schedule') }}
+                        </th>
+                        <th style="text-align: center">
+                            {{ trans('cruds.light.fields.status') }}
                         </th>
                         <th>
                             &nbsp;
@@ -45,43 +48,47 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $key => $user)
-                        <tr data-entry-id="{{ $user->id }}">
+                    @foreach($lights as $key => $light)
+                        <tr data-entry-id="{{ $light->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $user->id ?? '' }}
+                                {{ $light->id ?? '' }}
                             </td>
                             <td>
-                                {{ $user->name ?? '' }}
+                                {{ $light->name ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email ?? '' }}
+                                {{ $light->location ?? '' }}
                             </td>
                             <td>
-                                {{ $user->email_verified_at ?? '' }}
+                                <span class="badge badge-{{$light->health == 2 ? 'success':($light->health == 1 ? 'warning':'danger') }}">{{ $light->health == 2 ? 'Good':($light->health == 1 ? 'Average':'Bad') }}</span>
                             </td>
                             <td>
-                                @foreach($user->roles as $key => $item)
-                                    <span class="badge badge-info">{{ $item->title }}</span>
-                                @endforeach
+                                {{ $light->schedule ?? '' }}
+                            </td>
+                            <td style="text-align: center">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" {{ $light->status==1?'checked':'' }} disabled>
+                                    <label class="custom-control-label" for="customSwitch1">{{ $light->status==1?'ON - State':'OFF - State' }}</label>
+                                </div>
                             </td>
                             <td>
-                                @can('user_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.users.show', $user->id) }}">
+                                @can('light_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.lights.show', $light->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('user_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.users.edit', $user->id) }}">
+                                @can('light_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.lights.edit', $light->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('user_delete')
-                                    <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('light_delete')
+                                    <form action="{{ route('admin.lights.destroy', $light->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -103,11 +110,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('user_delete')
+@can('light_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.users.massDestroy') }}",
+    url: "{{ route('admin.lights.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

@@ -4,7 +4,7 @@
 <div class="card">
     <div class="card-header card-header-primary">
         <h4 class="card-title">
-            {{ trans('global.show') }} {{ trans('cruds.user.title') }}
+            {{ trans('global.show') }} {{ trans('cruds.light.title') }}
         </h4>
     </div>
 
@@ -14,46 +14,80 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.id') }}
+                            {{ trans('cruds.light.fields.id') }}
                         </th>
                         <td>
-                            {{ $user->id }}
+                            {{ $light->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.name') }}
+                            {{ trans('cruds.light.fields.name') }}
                         </th>
                         <td>
-                            {{ $user->name }}
+                            {{ $light->name }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.email') }}
+                            {{ trans('cruds.light.fields.location') }}
                         </th>
                         <td>
-                            {{ $user->email }}
+                            {{ $light->location }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.user.fields.email_verified_at') }}
+                            {{ trans('cruds.light.fields.gmap_location') }}
                         </th>
                         <td>
-                            {{ $user->email_verified_at }}
+                            {{ $light->gmap_location }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            Roles
+                            {{ trans('cruds.light.fields.gps_location') }}
                         </th>
                         <td>
-                            @foreach($user->roles as $id => $roles)
-                                <span class="label label-info label-many">{{ $roles->title }}</span>
-                            @endforeach
+                            {{ $light->gps_location }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.light.fields.health') }}
+                        </th>
+                        <td>
+                            <span class="badge badge-{{$light->health == 2 ? 'success':($light->health == 1 ? 'warning':'danger') }}">{{ $light->health == 2 ? 'Good':($light->health == 1 ? 'Average':'Bad') }}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.light.fields.status') }}
+                        </th>
+                        <td>
+                            <div class="custom-control custom-switch" style="margin-left: 15px">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1" {{ $light->status==1?'checked':'' }} disabled>
+                                <label class="custom-control-label" for="customSwitch1">{{ $light->status==1?'ON - State':'OFF - State' }}</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.light.fields.schedule') }}
+                        </th>
+                        <td>
+                            {{ $light->schedule }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.light.fields.power_consumption') }}
+                        </th>
+                        <td>
+                            {{ $light->power_consumption }}
+                        </td>
+                    </tr>
+
                 </tbody>
             </table>
             <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">

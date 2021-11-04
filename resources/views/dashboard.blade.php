@@ -10,8 +10,8 @@
                                 <i class="fa fas-book"></i>
                                 <i class="material-icons small">content_copy</i>
                             </div>
-                            <p class="card-category">Number of Staff</p>
-                            <h3 class="card-title">50
+                            <p class="card-category">Number of Light(s)</p>
+                            <h3 class="card-title">{{count($lights)}}
                             </h3>
                         </div>
 
@@ -23,8 +23,8 @@
                             <div class="card-icon">
                                 <i class="material-icons">store</i>
                             </div>
-                            <p class="card-category">Staff on Leave</p>
-                            <h3 class="card-title">28</h3>
+                            <p class="card-category">Light(s) Turned ON</p>
+                            <h3 class="card-title">{{count($lightsTurnedON)}}</h3>
                         </div>
 
                     </div>
@@ -33,10 +33,10 @@
                     <div class="card card-stats">
                         <div class="card-header card-header-danger card-header-icon">
                             <div class="card-icon">
-                                <i class="material-icons">Request for Approval</i>
+                                <i class="material-icons">cancel</i>
                             </div>
-                            <p class="card-category">Fixed Issues</p>
-                            <h3 class="card-title">10</h3>
+                            <p class="card-category">Light(s) Need Repair</p>
+                            <h3 class="card-title">{{count($lightsNeedRepair)}}</h3>
                         </div>
 
                     </div>
@@ -45,10 +45,10 @@
                     <div class="card card-stats">
                         <div class="card-header card-header-info card-header-icon">
                             <div class="card-icon">
-                                <i class="fa fa-twitter"></i>
+                                <i class="material-icons">light</i>
                             </div>
-                            <p class="card-category">Staff Present Today</p>
-                            <h3 class="card-title">25</h3>
+                            <p class="card-category">Light(s) in Perfect Working Condition</p>
+                            <h3 class="card-title">{{count($lightsPerfectCondition)}}</h3>
                         </div>
 
                     </div>
@@ -61,13 +61,13 @@
                             <div class="ct-chart" id="dailySalesChart"></div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Leave Cards</h4>
+                            <h4 class="card-title">Most Recent Light</h4>
                             <p class="card-category">
-                                <span class="text-success"><i class="fa fa-long-arrow-up"></i> 15% </span> increase in leave applications.</p>
+                                <span class="text-success"><i class="fa fa-long-arrow-up"></i> {{$mostRecentLight?$mostRecentLight->name:''}} </span> {{$mostRecentLight?$mostRecentLight->location:''}}.</p>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <i class="material-icons">access_time</i> updated 4 minutes ago
+                                <i class="material-icons">access_time</i> added {{$mostRecentLight?$mostRecentLight->created_at:''}}
                             </div>
                         </div>
                     </div>
@@ -78,28 +78,30 @@
                             <div class="ct-chart" id="websiteViewsChart"></div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Payslip Details</h4>
-                            <p class="card-category">Last Month's Payslip</p>
+                            <h4 class="card-title">Bad Light (Most Recent)</h4>
+                            <p class="card-category">
+                                <span class="text-danger"><i class="fa fa-long-arrow-down"></i> {{$mostRecentBadLight?$mostRecentBadLight->name:'NONE'}} </span> {{$mostRecentBadLight?$mostRecentBadLight->location:'NIL'}}.</p>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <i class="material-icons">access_time</i> Salary paid 2 days ago
+                                <i class="material-icons">access_time</i> updated a moment ago
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card card-chart">
-                        <div class="card-header card-header-danger">
+                        <div class="card-header card-header-info">
                             <div class="ct-chart" id="completedTasksChart"></div>
                         </div>
                         <div class="card-body">
-                            <h4 class="card-title">Completed Tasks</h4>
-                            <p class="card-category">Employee Performance</p>
+                            <h4 class="card-title">Last Altered Light</h4>
+                            <p class="card-category">
+                                <span class="text-info"><i class="fa fa-long-arrow-down"></i> {{$lights?$lights[0]->name:'NONE'}} </span> {{$lights?$lights[0]->location:'NIL'}}.</p>
                         </div>
                         <div class="card-footer">
                             <div class="stats">
-                                <i class="material-icons">access_time</i> updated 2 minutes ago
+                                <i class="material-icons">access_time</i> updated {{$lights?$lights[0]->updated_at:'Nil'}}
                             </div>
                         </div>
                     </div>
@@ -108,288 +110,86 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-tabs card-header-primary">
-                            <div class="nav-tabs-navigation">
-                                <div class="nav-tabs-wrapper">
-                                    <span class="nav-tabs-title">Tasks:</span>
-                                    <ul class="nav nav-tabs" data-tabs="tabs">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" href="#profile" data-toggle="tab">
-                                                <i class="material-icons">bug_report</i> Bugs
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#messages" data-toggle="tab">
-                                                <i class="material-icons">code</i> Website
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#settings" data-toggle="tab">
-                                                <i class="material-icons">cloud</i> Server
-                                                <div class="ripple-container"></div>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">Lights Needing Urgent Attention</h4>
+                            <p class="card-category">Lights that are either bad or in average working condition as at {{date('Y-m-d H:i:s')}}</p>
                         </div>
-                        <div class="card-body">
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="profile">
-                                    <table class="table">
-                                        <tbody>
+                        <div class="card-body table-responsive">
+                            <table class="table table-hover">
+                                <thead class="text-success">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Health</th>
+                                <th>Location</th>
+                                <th></th>
+                                </thead>
+                                <tbody>
+                                @if(isset($lightsNeedsAttention) && count($lightsNeedsAttention)>0)
+                                    @php($index = 0)
+                                    @foreach($lightsNeedsAttention as $light)
                                         <tr>
+                                            <td>{{$index+1}}</td>
+                                            <td>{{$light->name}}</td>
                                             <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
+                                                <span class="badge badge-{{$light->health == 2 ? 'success':($light->health == 1 ? 'warning':'danger') }}">{{ $light->health == 2 ? 'Good':($light->health == 1 ? 'Average':'Bad') }}</span>
                                             </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
+                                            <td>{{$light->location}}</td>
+                                            <td>
+                                                @can('light_show')
+                                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.lights.show', $light->id) }}">
+                                                        {{ trans('global.view') }}
+                                                    </a>
+                                                @endcan
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="">
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="">
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                            </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Create 4 Invisible User Experiences you Never Knew About</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane" id="messages">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                            </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="">
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="tab-pane" id="settings">
-                                    <table class="table">
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="">
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                                            </td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <div class="form-check">
-                                                    <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                                        <span class="form-check-sign">
-                                <span class="check"></span>
-                              </span>
-                                                    </label>
-                                                </div>
-                                            </td>
-                                            <td>Sign contract for "What are conference organizers afraid of?"</td>
-                                            <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-primary btn-link btn-sm">
-                                                    <i class="material-icons">edit</i>
-                                                </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-link btn-sm">
-                                                    <i class="material-icons">close</i>
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                                    @endforeach
+                                @endif
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12">
                     <div class="card">
-                        <div class="card-header card-header-warning">
-                            <h4 class="card-title">Employees Stats</h4>
-                            <p class="card-category">New employees on 15th September, 2016</p>
+                        <div class="card-header card-header-success">
+                            <h4 class="card-title">Latest Lights</h4>
+                            <p class="card-category">Latest Lights as at {{date('Y-m-d H:i:s')}}</p>
                         </div>
                         <div class="card-body table-responsive">
                             <table class="table table-hover">
-                                <thead class="text-warning">
+                                <thead class="text-success">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Salary</th>
-                                <th>Country</th>
+                                <th>Health</th>
+                                <th style="text-align: center">Status</th>
+                                <th></th>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Dakota Rice</td>
-                                    <td>$36,738</td>
-                                    <td>Niger</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Minerva Hooper</td>
-                                    <td>$23,789</td>
-                                    <td>Curaçao</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Sage Rodriguez</td>
-                                    <td>$56,142</td>
-                                    <td>Netherlands</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>Philip Chaney</td>
-                                    <td>$38,735</td>
-                                    <td>Korea, South</td>
-                                </tr>
+                                @if(isset($lights))
+                                    @php($index = 0)
+                                    @foreach($lights as $light)
+                                        <tr>
+                                            <td>{{$index+1}}</td>
+                                            <td>{{$light->name}}</td>
+                                            <td>
+                                                <span class="badge badge-{{$light->health == 2 ? 'success':($light->health == 1 ? 'warning':'danger') }}">{{ $light->health == 2 ? 'Good':($light->health == 1 ? 'Average':'Bad') }}</span>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <div class="custom-control custom-switch">
+                                                    <input type="checkbox" class="custom-control-input" id="customSwitch1" {{ $light->status==1?'checked':'' }} disabled>
+                                                    <label class="custom-control-label" for="customSwitch1">{{ $light->status==1?'ON - State':'OFF - State' }}</label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @can('light_show')
+                                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.lights.show', $light->id) }}">
+                                                        {{ trans('global.view') }}
+                                                    </a>
+                                                @endcan
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endif
                                 </tbody>
                             </table>
                         </div>

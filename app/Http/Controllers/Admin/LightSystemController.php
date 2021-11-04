@@ -2,82 +2,76 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\MassDestroyLightRequest;
+use App\Http\Requests\StoreLightRequest;
+use App\Http\Requests\UpdateLightRequest;
 use App\LightSystem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class LightSystemController extends Controller
 {
 
     public function index()
     {
-        $allLights = LightSystem::all();
-        return view('admin.lights.index', compact('allLights'));
+        abort_if(Gate::denies('light_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $lights = LightSystem::all();
+        return view('admin.lights.index', compact('lights'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        abort_if(Gate::denies('light_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin.lights.create');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(StoreLightRequest $request)
     {
-        //
+        $light = LightSystem::create($request->all());
+        return redirect()->route('admin.lights.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\LightSystem  $lightSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LightSystem $lightSystem)
+
+    public function show(LightSystem $light)
     {
-        //
+        abort_if(Gate::denies('light_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin.lights.show', compact('light'));
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\LightSystem  $lightSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(LightSystem $lightSystem)
+    public function edit(LightSystem $light)
     {
-        //
+        abort_if(Gate::denies('light_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        return view('admin.lights.edit', compact('light'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\LightSystem  $lightSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, LightSystem $lightSystem)
+
+    public function update(UpdateLightRequest $request, LightSystem $light)
     {
-        //
+        $light->update($request->all());
+        return redirect()->route('admin.lights.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\LightSystem  $lightSystem
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(LightSystem $lightSystem)
+
+    public function destroy(LightSystem $light)
     {
-        //
+        abort_if(Gate::denies('light_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $light->delete();
+        return back();
+
+    }
+
+    public function massDestroy(MassDestroyLightRequest $request)
+    {
+        LightSystem::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
+
     }
 }

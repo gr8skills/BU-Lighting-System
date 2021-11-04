@@ -20,6 +20,33 @@
                     </p>
                 </a>
             </li>
+            @can('light_management_access')
+                <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/lights*') ? 'menu-open' : '' }}">
+                    <a class="nav-link" data-toggle="collapse" href="#light_management">
+                        <i class="fa-fw far fa-lightbulb">
+
+                        </i>
+                        <p>
+                            <span>{{ trans('cruds.lightManagement.title') }}</span>
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <div class="collapse hide" id="light_management">
+                        <ul class="nav">
+                            @can('light_management_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.lights.index") }}" class="nav-link {{ request()->is('admin/lights') || request()->is('admin/lights/*') ? 'active' : '' }}">
+                                        <i class="fa-fw fas fa-sun">
+
+                                        </i>
+                                        <span>{{ trans('cruds.lightManagement.title_one') }}</span>
+                                    </a>
+                                </li>
+                            @endcan
+                        </ul>
+                    </div>
+                </li>
+            @endcan
             @can('user_management_access')
                 <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }}">
                     <a class="nav-link" data-toggle="collapse" href="#user_management">
@@ -60,33 +87,6 @@
 
                                         </i>
                                         <span>{{ trans('cruds.user.title') }}</span>
-                                    </a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </div>
-                </li>
-            @endcan
-            @can('light_management_access')
-                <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/lights*') ? 'menu-open' : '' }}">
-                    <a class="nav-link" data-toggle="collapse" href="#light_management">
-                        <i class="fa-fw far fa-lightbulb">
-
-                        </i>
-                        <p>
-                            <span>{{ trans('cruds.lightManagement.title') }}</span>
-                            <b class="caret"></b>
-                        </p>
-                    </a>
-                    <div class="collapse hide" id="light_management">
-                        <ul class="nav">
-                            @can('light_management_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.lights.index") }}" class="nav-link {{ request()->is('admin/lights') || request()->is('admin/lights/*') ? 'active' : '' }}">
-                                        <i class="fa-fw fas fa-sun">
-
-                                        </i>
-                                        <span>{{ trans('cruds.lightManagement.title') }}</span>
                                     </a>
                                 </li>
                             @endcan

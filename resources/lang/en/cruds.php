@@ -41,6 +41,7 @@ return [
     ],
     'lightManagement' => [
         'title'          => 'Light Management',
+        'title_one'     => 'Lights',
         'title_singular' => 'Light Management',
     ],
     'user'           => [
@@ -67,6 +68,30 @@ return [
             'updated_at_helper'        => '',
             'deleted_at'               => 'Deleted at',
             'deleted_at_helper'        => '',
+        ],
+    ],
+    'light'           => [
+        'title'          => 'Lights',
+        'title_singular' => 'Light',
+        'fields'         => [
+            'id'                       => 'ID',
+            'id_helper'                => '',
+            'name'                     => 'Name',
+            'name_helper'              => '',
+            'location'                    => 'Location',
+            'location_helper'             => '',
+            'gmap_location'                    => 'Google Map Location',
+            'gmap_location_helper'             => '',
+            'gps_location'                    => 'GPS Coordinates (Longitude, Latitude)',
+            'gps_location_helper'             => '',
+            'status'        => 'Light Status',
+            'status_helper' => '',
+            'power_consumption'                 => 'Power Consumption',
+            'power_consumption_helper'          => '',
+            'schedule'                    => 'Schedule',
+            'schedule_helper'             => '',
+            'health'           => 'Health',
+            'health_helper'    => '',
         ],
     ],
 ];
