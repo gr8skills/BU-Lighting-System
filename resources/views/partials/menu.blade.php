@@ -3,7 +3,9 @@
     <!-- Brand Logo -->
     <div class="logo">
         <a href="#" class="simple-text logo-normal" style="color: #9c27b066; font-weight: bolder">
-            {{ trans('panel.site_title') }}
+            <strong>
+                {{ trans('panel.site_title') }}
+            </strong>
         </a>
     </div>
 
