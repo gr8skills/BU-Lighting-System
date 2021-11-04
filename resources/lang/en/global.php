@@ -246,4 +246,6 @@ return [
     'you_have_no_messages'                 => 'You have no messages.',
     'content'                              => 'Content',
     'no_alerts'                            => 'No alerts',
+    'on'                                   => 'ON All',
+    'off'                                   => 'OFF All'
 ];

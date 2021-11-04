@@ -6,6 +6,12 @@
             <a class="btn btn-success" href="{{ route("admin.lights.create") }}">
                 {{ trans('global.add') }} {{ trans('cruds.light.title_singular') }}
             </a>
+            <a class="btn btn-info" href="{{ route("admin.lights.onAllLights") }}">
+                {{ trans('global.on') }} {{ trans('cruds.light.title_singular') }}
+            </a>
+            <a class="btn btn-danger" href="{{ route("admin.lights.offAllLights") }}">
+                {{ trans('global.off') }} {{ trans('cruds.light.title_singular') }}
+            </a>
         </div>
     </div>
 @endcan

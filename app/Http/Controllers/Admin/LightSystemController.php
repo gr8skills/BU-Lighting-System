@@ -74,4 +74,26 @@ class LightSystemController extends Controller
         return response(null, Response::HTTP_NO_CONTENT);
 
     }
+
+    public function onAllLights()
+    {
+       $lights = LightSystem::all();
+       if (count($lights) > 0){
+           foreach ($lights as $light){
+               $light->update(['status'=>1]);
+           }
+           return back();
+       }
+    }
+
+    public function offAllLights()
+    {
+       $lights = LightSystem::all();
+       if (count($lights) > 0){
+           foreach ($lights as $light){
+               $light->update(['status'=>0]);
+           }
+           return back();
+       }
+    }
 }
