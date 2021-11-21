@@ -96,4 +96,47 @@ class LightSystemController extends Controller
            return back();
        }
     }
+
+    public function directLightStatus($id)
+    {
+        $light = LightSystem::find($id);
+        if (isset($light)){
+            $status = $light->status;
+            return response()->json([
+                'code'=>777,
+                'light-status'=>$status,
+            ]);
+        }else{
+            return response()->json([
+                'code' => 100,
+                'light-status'=>'Light Not found',
+            ]);
+        }
+
+    }
+
+    public function directLightSwitch($id,$switch)
+    {
+        if ($switch == 0 || $switch == 1){
+            $light = LightSystem::find($id);
+            if (isset($light)){
+                $light->update(['status'=>$switch]);
+                return response()->json([
+                    'code'=>777,
+                    'light-status'=>$light->status,
+                ]);
+            }else{
+                return response()->json([
+                    'code' => 100,
+                    'light-status'=>'Light Not found',
+                ]);
+            }
+        }else{
+            return response()->json([
+                'code'=>100,
+                'light-status'=>'This light can only be switched ON or OFF',
+            ]);
+        }
+
+    }
 }

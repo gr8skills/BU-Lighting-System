@@ -23,4 +23,10 @@ class HomeController
             ->get();
         return view('dashboard', compact('lights', 'lightsTurnedON', 'lightsNeedRepair', 'lightsPerfectCondition', 'mostRecentLight', 'mostRecentBadLight', 'lightsNeedsAttention'));
     }
+
+    public function directStatus()
+    {
+        dd('ok');
+//        $light = LightSystem::find($id);
+    }
 }

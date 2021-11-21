@@ -13,4 +13,12 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Lights
     Route::apiResource('lights', 'UsersApiController');
 
+
 });
+
+Route::group(['prefix' => 'v1', 'as' => 'api.'], function () {
+    Route::get('light/status/{id}', 'Admin\LightSystemController@directLightStatus');
+    Route::get('light/switch/{id}/{value}', 'Admin\LightSystemController@directLightSwitch');
+});
+
+

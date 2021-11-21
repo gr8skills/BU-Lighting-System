@@ -1,8 +1,10 @@
 <?php
 
+//Route::get('/light/status', 'HomeController@directStatus')->name('direct light status');
 Route::redirect('/', '/login');
 Route::redirect('/home', '/admin');
 Auth::routes(['register' => false]);
+
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
@@ -25,3 +27,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('light/off-all-lights', 'LightSystemController@offAllLights')->name('lights.offAllLights');
 
 });
+
+
