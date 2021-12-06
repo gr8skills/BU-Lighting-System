@@ -94,7 +94,7 @@
 
             <div class="form-group {{ $errors->has('schedule') ? 'has-error' : '' }}">
                 <label for="schedule">{{ trans('cruds.light.fields.schedule') }}</label>
-                <input type="text" id="schedule" name="schedule" class="form-control" placeholder="18-01-00 (24 hour format)" required>
+                <input type="text" id="schedule" name="schedule" class="form-control" placeholder="18:01:00 (24 hour format)" required>
                 @if($errors->has('schedule'))
                     <p class="help-block">
                         {{ $errors->first('schedule') }}
