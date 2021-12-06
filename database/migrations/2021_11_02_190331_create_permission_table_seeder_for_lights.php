@@ -45,6 +45,12 @@ class CreatePermissionTableSeederForLights extends Migration
                 'created_at' => '2019-09-10 14:00:26',
                 'updated_at' => '2019-09-10 14:00:26',
             ],
+            [
+                'id'         => '21',
+                'title'      => 'light_access',
+                'created_at' => '2019-09-10 14:00:26',
+                'updated_at' => '2019-09-10 14:00:26',
+            ],
         ];
         Permission::insert($permissions);
     }

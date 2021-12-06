@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateLightSystemsTable extends Migration
@@ -24,6 +26,24 @@ class CreateLightSystemsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        //seed light with example data
+        Model::unguard();
+        $light = [
+            [
+                'id'         => '1',
+                'location'      => 'Ilishan Remo',
+                'name'      => 'Dummy Light',
+                'status'      => 0,
+                'power_consumption'      => '0 Watt',
+                'schedule'      => 'Now',
+                'health'      => 'Good',
+                'created_at' => '2021-11-01 14:00:26',
+                'updated_at' => '2019-11-01 14:00:26',
+            ],
+        ];
+        DB::table('light_systems')->insert($light);
+
     }
 
     /**
