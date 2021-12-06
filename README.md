@@ -1,13 +1,14 @@
-# Laravel Material Dashboard
+# BU LIghting System
 
-Simple Laravel adminpanel based on [Material Dashboard theme from Creative Tim](https://www.creative-tim.com/product/material-dashboard-laravel)
+Babcock University Lighting System [BU Lighting System](https://https://app.bulightingsystem.com)
 
-Generated with [QuickAdminPanel generator](https://2019.quickadminpanel.com) and manually applied front-end theme.
+Developed with [Laravel](https://laravel.io) and manually applied front-end theme.
 
 What's inside:
 
 - Login/Register functionality with default Laravel 
 - Managing Users/Roles/Permissions CRUDs: tables, and forms
+- Managing Lights/Light Status CRUDs: tables, and forms
 
 ![Laravel Material Dashboard screenshot](https://laraveldaily.com/wp-content/uploads/2019/09/Screen-Shot-2019-09-20-at-1.03.22-PM.png)
 
@@ -17,6 +18,13 @@ What's inside:
 
 
 ---
+
+## Tools needed
+
+- Windows __WAMP__, Linux __LAMP__ or Mac __MAMP__ stack with PHP version 7.3+
+- Composer
+- IDE such as __VSCode__, __PHPStorm__
+
 
 ## How to use
 
@@ -30,13 +38,12 @@ What's inside:
 
 ## License
 
-Basically, feel free to use and re-use any way you want.
+Licensed to Babcock University, Ilishan Remo, Nigeria.
 
 ---
 
-## More from our LaravelDaily Team
+## More from our BULighting Project Team
 
-- Check out our adminpanel generator [QuickAdminPanel](https://quickadminpanel.com)
 - Read our [Blog with Laravel Tutorials](https://laraveldaily.com)
 - FREE E-book: [50 Laravel Quick Tips (and counting)](https://laraveldaily.com/free-e-book-40-laravel-quick-tips-and-counting/)
 - Subscribe to our [YouTube channel Laravel Business](https://www.youtube.com/channel/UCTuplgOBi6tJIlesIboymGA)
