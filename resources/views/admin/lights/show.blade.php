@@ -69,7 +69,13 @@
                                 <input type="checkbox" class="custom-control-input" id="customSwitch1" {{ $light->status==1?'checked':'' }} disabled>
                                 <label class="custom-control-label" for="customSwitch1">{{ $light->status==1?'ON - State':'OFF - State' }}</label>
                             </div>
+                            @can('light_edit')
+                                <a class="btn btn-xs btn-{{ $light->status==1?'danger':'info' }}" href="{{ route('admin.lights.toggleONOFF', $light->id) }}">
+                                    {{ $light->status==1?'OFF':'ON' }}
+                                </a>
+                            @endcan
                         </td>
+
                     </tr>
                     <tr>
                         <th>
@@ -84,7 +90,7 @@
                             {{ trans('cruds.light.fields.power_consumption') }}
                         </th>
                         <td>
-                            {{ $light->power_consumption }}
+                            {{ $light->power_consumption }}kWh
                         </td>
                     </tr>
 

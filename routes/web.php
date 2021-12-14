@@ -25,6 +25,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('lights', 'LightSystemController');
     Route::get('light/on-all-lights', 'LightSystemController@onAllLights')->name('lights.onAllLights');
     Route::get('light/off-all-lights', 'LightSystemController@offAllLights')->name('lights.offAllLights');
+    Route::get('light/toggle', 'LightSystemController@toggleONOFF')->name('lights.toggleONOFF');
+    Route::post('light/toggle', 'LightSystemController@toggleONOFF')->name('lights.toggleONOFF');
 
 });
 

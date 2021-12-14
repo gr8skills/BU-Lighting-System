@@ -9,6 +9,7 @@ use App\LightSystem;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Gate;
+use Symfony\Component\Console\Input\Input;
 use Symfony\Component\HttpFoundation\Response;
 
 class LightSystemController extends Controller
@@ -138,5 +139,16 @@ class LightSystemController extends Controller
             ]);
         }
 
+    }
+
+    public function toggleONOFF()
+    {
+        $data = \request()->all();
+        $id = key($data);
+        $light = LightSystem::find($id);
+        if (isset($light) && !is_null($light)){
+            $light->status==1?$light->update(['status'=>0]):$light->update(['status'=>1]);
+        }
+        return back();
     }
 }
