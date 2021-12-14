@@ -90,7 +90,7 @@
                             {{ trans('cruds.light.fields.power_consumption') }}
                         </th>
                         <td>
-                            {{ $light->power_consumption }}kWh
+                            {{ $light->power_consumption }}{{'kWh'}}
                         </td>
                     </tr>
 
