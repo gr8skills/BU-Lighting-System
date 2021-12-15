@@ -82,7 +82,7 @@
                             </td>
                             <td>
                                 @can('light_edit')
-                                    <a class="btn btn-xs btn-{{ $light->status==1?'danger':'info' }}" href="{{ route('admin.lights.toggleONOFF', $light->id) }}">
+                                    <a class="btn btn-xs btn-{{ $light->status==1?'danger':'success' }}" href="{{ route('admin.lights.toggleONOFF', $light->id) }}">
                                         {{ $light->status==1?'OFF':'ON' }}
                                     </a>
                                 @endcan
